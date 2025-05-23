@@ -48,7 +48,7 @@ async function main() {
 const store=MongoStore.create({
     mongoUrl:dburl,
     crypto:{
-        secret:"harrypotterandhalfbloodprience",
+        secret:process.env.SECRET,
     },
     touchAfter:24*3600,
 })
@@ -61,7 +61,7 @@ store.on("error",()=>{
 // Session options with environment variable secret
 const sessionOptions = {
     store,    //store:store
-    secret:  "harrypotterandhalfbloodprience",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
