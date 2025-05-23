@@ -1,0 +1,158 @@
+<% layout('/layouts/boilerplate') -%>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: nowrap;
+    
+
+  }
+  .filter{
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.7;
+
+  }
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .filter p{
+    font-size: 0.8rem;
+  }
+
+  .tax-toggle{
+    height: 3.5rem;
+   
+    display: flex;
+    border: 2px solid black;
+    border-radius: 1.5rem;
+    
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-left: 3rem;
+    
+  }
+  .tax{
+    display: none;
+  }
+
+
+
+
+
+
+</style>
+<div class="filters">
+  <div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+    <p>Iconic cities</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+  </div>
+ 
+  <div class="filter">
+    <div><i class="fa-duotone fa-solid fa-person-swimming"></i></div>
+    <p>Mazing Pools</p>
+  </div>
+
+ 
+  <div class="filter">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Camping</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-cow"></i></div>
+    <p>Farms</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-snowflake"></i></div>
+    <p>Arctic</p>
+  </div>
+
+  <div class="filter">
+    <div><i class="fa-solid fa-ship"></i></div>
+    <p>Boat</p>
+  </div>
+ 
+  <div class="filter">
+    <div><i class="fa-solid fa-igloo"></i></div>
+    <p>Igloo</p>
+  </div>
+ 
+  <div class="filter">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Breakfast</p>
+  </div>
+ 
+
+  <div class="tax-toggle">
+    <div class="form-check form-switch form-check-reverse">
+      <input class="form-check-input" type="checkbox" id="switchCheckReverse">
+      <label class="form-check-label" for="switchCheckReverse">Display Total After Tax</label>
+    </div>
+  </div>
+  
+</div>
+
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 ">
+        <% for(let list of allist ){%>
+            <a href="/listing/<%= list._id%>" class="link">
+                <div class="card col listing-card" >
+                    <img src="<%= list.image.url%>" class="card-img-top" alt="listimage"  style="height: 20rem;" >
+                    <div class="card-img-overlay"><i class="fa-regular fa-heart"></i></div>
+                     
+                    <div class="card-body">
+                      <p class="card-text">
+                        <b> <%= list.title%></b> 
+                        <br>
+                        &#8377;<%= list.price.toLocaleString("en-IN")%>/night
+                        <i class="tax"> &nbsp; &nbsp;  +18% GST &nbsp; final price &nbsp; &nbsp; &#8377;<%= list.price+(list.price*0.18) %></i>
+                       
+                      </p>
+                    </div>
+                  </div>
+          </a>
+
+    <% }%>
+
+</div>
+    
+
+
+
+<script>
+  let toggle=document.getElementById("switchCheckReverse");
+  toggle.addEventListener("click",()=>{
+
+    let taxinfos=document.getElementsByClassName("tax");
+
+   
+   for(info of taxinfos){
+    if (info.style.display!="inline") {
+       info.style.display="inline";
+
+
+     }
+     else {
+       info.style.display = "none";
+
+     }
+   }
+  })
+
+</script>
